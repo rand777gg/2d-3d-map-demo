@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import WorldMap from "@/components/ui/world-map";
-import { World } from "@/components/ui/globe"; // 假设你的 Globe 组件路径
 import { motion } from "motion/react";
+import dynamic from 'next/dynamic';
+
+const World = dynamic(() => import("@/components/ui/globe").then(mod => ({ default: mod.World })), {
+  ssr: false,
+});
 
 export default function Page() {
   const [activeView, setActiveView] = useState<"map" | "globe">("map");
